@@ -141,7 +141,9 @@ Save the configuration.
 
 <img width="1314" height="666" alt="image" src="https://github.com/user-attachments/assets/c3a29708-74a6-4997-a75b-1545c36dbc4e" />
 
+### Basic Usage
 
+Create a `Jenkinsfile` in your project:
 
 ```groovy
 @Library('jenkins-shared-library@main') _
