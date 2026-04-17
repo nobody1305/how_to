@@ -105,6 +105,9 @@ Save the configuration.
 
 ## 🔐 4. SSH Setup (Required for GitLab)
 
+<img width="595" height="671" alt="image" src="https://github.com/user-attachments/assets/2c636d7b-a05b-4902-8422-806652306360" />
+
+
 1. Generate SSH key:
 
    ```
@@ -133,6 +136,12 @@ Save the configuration.
 ---
 
 ## 🚀 5. Use Shared Library in Jenkinsfile
+
+<img width="1656" height="745" alt="image" src="https://github.com/user-attachments/assets/dacaf9bc-26d9-4ee6-8529-9c0b7d78bbb3" />
+
+<img width="1314" height="666" alt="image" src="https://github.com/user-attachments/assets/c3a29708-74a6-4997-a75b-1545c36dbc4e" />
+
+
 
 ```groovy
 @Library('jenkins-shared-library@main') _
@@ -195,6 +204,7 @@ Test inside container:
 ssh -T git@gitlab.com
 ```
 if this not working repeat step inside container or master jenkins
+
 <img width="478" height="46" alt="image" src="https://github.com/user-attachments/assets/65d7bbc3-06e4-4d37-9fff-098ba8b0dc9a" />
 
 
