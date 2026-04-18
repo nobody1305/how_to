@@ -45,6 +45,8 @@ Example:
 Organization: devsecaiops2
 ProjectKey: devsecaiops2_java-testing
 ```
+<img width="835" height="552" alt="image" src="https://github.com/user-attachments/assets/393f9442-7617-482e-b5b2-89d41467d5e8" />
+
 
 ---
 
@@ -98,6 +100,9 @@ Add SonarQube server:
 
   * Add token from SonarCloud
 
+<img width="943" height="552" alt="image" src="https://github.com/user-attachments/assets/7e0ee5ad-2587-46d8-b5a3-cf05ffc8e1f4" />
+
+
 ---
 
 ## 3. Configure Tools
@@ -119,6 +124,9 @@ Add:
 * Name: `Maven`
 
 ---
+
+<img width="932" height="604" alt="image" src="https://github.com/user-attachments/assets/27a0436c-9202-47b4-97d1-9576e396abec" />
+
 
 # ⚙️ STEP 3 — Prepare Java Project
 
@@ -205,6 +213,9 @@ def call(Map config) {
 2. Point to your repo
 3. Run build
 
+<img width="887" height="404" alt="image" src="https://github.com/user-attachments/assets/aca526bf-f9f2-453d-a2fa-ea269af571be" />
+
+
 ---
 
 # ✅ Expected Result
@@ -217,6 +228,9 @@ After successful run:
   * Code smells
   * Security issues (e.g. hardcoded password)
 * Dashboard populated
+
+<img width="1761" height="809" alt="image" src="https://github.com/user-attachments/assets/fb782bff-7cce-4c05-904e-1cb91e135034" />
+
 
 ---
 
