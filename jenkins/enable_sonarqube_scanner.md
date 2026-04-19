@@ -332,12 +332,13 @@ Check:
 
 # ⚠️ Common Issues & Fixes
 
-| Issue                        | Cause              | Fix                      |
-| ---------------------------- | ------------------ | ------------------------ |
-| `sonar.organization missing` | Using SonarCloud   | Add organization         |
-| `404 error`                  | Project not in org | Create/import project    |
-| Jenkins error                | Name mismatch      | Match `withSonarQubeEnv` |
-| No scan result               | Wrong projectKey   | Copy exact key           |
+| Issue                        | Cause                | Fix                            |
+| ---------------------------- | -------------------- | ------------------------------ |
+| `sonar.organization missing` | Using SonarCloud     | Add organization               |
+| `404 error`                  | Project not in org   | Create/import project          |
+| Jenkins error                | Name mismatch        | Match `withSonarQubeEnv`       |
+| No scan result               | Wrong projectKey     | Copy exact key                 |
+| readJSON missing             | Plugin not installed | Install Pipeline Utility Steps |
 
 ---
 
