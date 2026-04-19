@@ -181,7 +181,12 @@ def call(Map config) {
       maven 'Maven'
     }
 
+    environment {
+      SONAR_TOKEN = credentials('sonarqube')
+    }
+
     stages {
+
       stage('Build') {
         steps {
           sh 'mvn clean compile'
@@ -200,6 +205,68 @@ def call(Map config) {
           }
         }
       }
+
+      // Optional but recommended
+      // stage('Quality Gate') {
+      //   steps {
+      //     timeout(time: 5, unit: 'MINUTES') {
+      //       waitForQualityGate abortPipeline: true
+      //     }
+      //   }
+      // }
+
+      stage('Show Sonar Issues') {
+        steps {
+          script {
+            def response = sh(
+              script: '''
+                #curl -s -u $SONAR_TOKEN: \
+                #"https://sonarcloud.io/api/issues/search?componentKeys=devsecaiops2_java-testing&pageSize=100"
+                                  
+                curl -s -u $SONAR_TOKEN: \\
+                "https://sonarcloud.io/api/issues/search?componentKeys=devsecaiops2_java-testing&severities=CRITICAL,MAJOR&types=VULNERABILITY,BUG"
+              ''',
+              returnStdout: true
+            ).trim()
+
+            def json = readJSON text: response
+
+            if (json.total > 0) {
+              echo "🚨 Found ${json.total} issues:\n"
+
+              json.issues.each { issue ->
+                def line = issue.textRange?.startLine ?: "N/A"
+
+                echo """
+Type: ${issue.type}
+Severity: ${issue.severity}
+File: ${issue.component}
+Line: ${line}
+Message: ${issue.message}
+----------------------------------------
+"""
+              }
+
+              // Stop only if vulnerabilities exist
+              def vulnCount = json.issues.findAll { it.type == 'VULNERABILITY' }.size()
+
+              if (vulnCount > 0) {
+                error("❌ Pipeline stopped due to ${vulnCount} vulnerabilities")
+              }
+
+            } else {
+              echo "✅ No issues found"
+            }
+          }
+        }
+      }
+
+      stage('Next Step') {
+        steps {
+          echo "🚀 Build is safe, continuing pipeline..."
+        }
+      }
+
     }
   }
 }
@@ -231,8 +298,21 @@ After successful run:
 
 <img width="1761" height="809" alt="image" src="https://github.com/user-attachments/assets/fb782bff-7cce-4c05-904e-1cb91e135034" />
 
+📊 Example Output
+🚨 Found 2 issues:
 
+Type: VULNERABILITY
+Severity: CRITICAL
+File: src/main/java/com/example/App.java
+Line: 5
+Message: Hardcoded password detected
+----------------------------------------
 ---
+
+<img width="835" height="643" alt="image" src="https://github.com/user-attachments/assets/b35fd94f-d4a1-4e76-bc00-1fc6d1baa01a" />
+
+<img width="905" height="855" alt="image" src="https://github.com/user-attachments/assets/cebc3a44-2a59-4121-8054-eb24a2c07250" />
+
 
 # 🔍 Verification
 
